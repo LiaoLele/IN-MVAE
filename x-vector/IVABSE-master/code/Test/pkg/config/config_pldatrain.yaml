@@ -1,0 +1,22 @@
+training: !!bool "false"
+pre_processing: !!bool 'false'
+checking: !!bool 'false'
+device: 0
+---
+path:
+    # script_prefix: '/data/hdd0/zhaoyigu'
+    # data_prefix: '/data/ssd1/zhaoyi.gu'
+    script_prefix: '/home/user/zhaoyi.gu/mnt/g2'
+    data_prefix: '/data/ssd0/zhaoyi.gu'
+    xvecmodel_path: 'PROJECT/Xvector_speaker_encoder_data/diraug_librispeech_01/model/state_dict--sub_epoch=500.pt'
+    traindata_path: 'DATASET/SEPARATED_LIBRISPEECH/TRAIN_DATA/AUG_DATA/DIR_AUG_DATA/combine/egs/egs.train.pkl'
+---
+data:
+    sr: 16000
+    stft_frame: 0.064 #(s)
+    stft_hop: 0.016 #(s)
+    lda_dim: 128
+---   
+model:
+    nmels: 40
+    feat_num: 30

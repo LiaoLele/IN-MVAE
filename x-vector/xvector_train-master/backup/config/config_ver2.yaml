@@ -1,0 +1,71 @@
+training: !!bool "true"
+device:
+    # - 0
+    - 1
+---
+path:
+    readme: 'Only data from separation has zero mean, original data is still from librispeech/concatenate'
+    prefix: '/home/user/zhaoyi.gu/mnt/g2'
+    # traininfo_path: 'DATASET/SEPARATED_LIBRISPEECH/DATA_MN/train_clean/combine/egs/egs_train.pkl'
+    # vadinfo_path: 'DATASET/SEPARATED_LIBRISPEECH/DATA_MN/train_clean/combine/egs/egs_vad.pkl'
+    # diagnosisinfo_path: 'DATASET/SEPARATED_LIBRISPEECH/DATA_MN/train_clean/combine/egs/egs_diagnosis.pkl'
+    # traininfo_path: 'DATASET/Librispeech/concatenate/train_clean/egs/egs_train_2.pkl'
+    # vadinfo_path: 'DATASET/Librispeech/concatenate/train_clean/egs/egs_vad.pkl'
+    # diagnosisinfo_path: 'DATASET/Librispeech/concatenate/train_clean/egs/egs_diagnosis.pkl'
+    model_path: 'PROJECT/Xvector_speaker_encoder_data/test_librispeech_test/model/'
+    log_path: 'PROJECT/Xvector_speaker_encoder_data/test_librispeech_test/model/log.txt'
+    resumemodel_path: 'PROJECT/Xvector_speaker_encoder_data/test_librispeech_test/model/model--250.pt'
+---
+data:
+    sr: 16000
+    stft_len: 0.064 #(s)
+    stft_hop: 0.016 #(s)
+---   
+model:
+    feat_num: 30
+    tdnn_channels: 
+      - 512
+      - 512
+      - 512
+      - 512
+      - 1500
+    fc_channels:
+      - 512
+      - 512
+---
+train:
+    vad_interval: 365  # 5 times
+    nbatch_for_vad: 100
+    batch_size : 160 
+    num_workers: 4 #number of workers for dataloader
+    lr: 0.01
+    use_lr_decay: !!bool "true"
+    min_lr: 0.001
+    lr_activate_idx: 200
+    lr_deactivate_idx: 500
+    lr_decay_step: 1
+    drop_p: 0.0
+    use_dropout: !!bool "true"
+    dropout_strategy: "0@0.0,50@0.15"  # "0@0,150@0,300@0.15,500@0.02" 
+    epochs: 5000 #Max training speaker epoch 
+    log_interval: 30 # Epochs before printing progress
+    checkpoint_interval: 10 #Save model after x speaker epochs
+    resume: !!bool "false" #Resume training from previous model path
+    tensorboard_title: 'librispeech'
+    clip: {'model by norm': 3}
+# ---
+# test:
+#     test_path: '/data/hdd0/zhaoyigu/DATASET/Librispeech/concatenate/test_dev_clean/'
+#     num_speaker: 80
+#     num_utter_per_speaker: 0
+#     average_frame_num_train: 160
+#     N : 8 #Number of speakers in batch
+#     enroll_num: 8 #Number of utterances per speaker
+#     verify_num: 10
+#     enroll_hop: 0.5
+#     verify_hop: 1
+#     num_workers: 3 #number of workers for data laoder
+#     epochs: 50 #testing speaker epochs
+#     frame_num: 160
+#     model_path: '/data/hdd0/zhaoyigu/PROJECT/GE2E_speaker_encoder_data/test_librispeech--64_02/model/'
+#     best_performance: 0

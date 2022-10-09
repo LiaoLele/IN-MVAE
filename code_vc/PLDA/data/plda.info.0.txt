@@ -1,0 +1,3 @@
+xvector_after_lda_path: /home/nis/lele.liao/projects/code_vc/PLDA/data/xvec_afterlda.withlengthnorm.0.pkl
+length normalization: True
+Centralization: True

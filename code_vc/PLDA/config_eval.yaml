@@ -1,0 +1,32 @@
+training: !!bool "false"
+pre_processing: !!bool 'false'
+checking: !!bool 'false'
+device: 1
+---
+path:
+    script_prefix: '/data/hdd0/zhaoyigu'
+    # script_prefix: '/home/user/zhaoyi.gu/mnt/g2'
+
+    xvecmodel_path:  # [sepaug, diraug, withoutaug]
+        - 'PROJECT/Xvector_speaker_encoder_data/sepaug_librispeech_01/model/state_dict--sub_epoch=500.pt'
+        - 'PROJECT/Xvector_speaker_encoder_data/diraug_librispeech_01/model/state_dict--sub_epoch=500.pt'
+        - 'PROJECT/Xvector_speaker_encoder_data/test_librispeech_01/model/state_dict--sub_epoch=500.pt'
+    # ge2emodel_path: 
+    #     - 'PROJECT/GE2E_speaker_encoder_data/test_auglibrispeech--64_01/model/state_dict--sub_epoch=1400.pt'
+    #     - 'PROJECT/GE2E_speaker_encoder_data/test_librispeech--64_04/model/state_dict--sub_epoch=1410.pt'
+    # traininfo_path: 
+    #     - 'DATASET/SEPARATED_LIBRISPEECH/DATA_MN/train_clean/combine/egs/egs_train.pkl'
+    #     - 'DATASET/Librispeech/concatenate/train_clean/egs/egs_train.pkl'
+    # xvector_path: 'DATASET/SEPARATED_LIBRISPEECH/PLDA_train/model_with_aug/with_aug/xvec_train.pkl'
+    # lda_path: 'DATASET/SEPARATED_LIBRISPEECH/PLDA_train/model_with_aug/with_aug/lda_machine.hdf5'
+    # plda_path: 'DATASET/SEPARATED_LIBRISPEECH/PLDA_train/model_with_aug/with_aug/plda_base_only_ln.hdf5'
+---
+data:
+    sr: 16000
+    stft_frame: 0.064 #(s)
+    stft_hop: 0.016 #(s)
+---   
+model:
+    # nmels: 40
+    nmels: 30
+    feat_num: 30

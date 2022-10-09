@@ -1,0 +1,3 @@
+xvector_path: /home/nis/lele.liao/projects/code_vc/PLDA/data/xvec_ndarray.zero_mean.train.0.pkl
+lda_path: /home/nis/lele.liao/projects/code_vc/PLDA/data/lda_machine.withdimreduction.0.hdf5
+Centralization: True

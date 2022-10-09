@@ -1,0 +1,32 @@
+---
+data:
+    sr: 16000
+    stft_frame: 0.064 #(s)
+    stft_hop: 0.016 #(s)
+---   
+model:
+    # GE2E speaker embedding
+    nmels: 40
+    hidden: 256
+    proj: 64 
+    num_layer: 3 
+    # X-vector speaker embedding
+    feat_num: 30
+    tdnn_channels: 
+      - 512
+      - 512
+      - 512
+      - 512
+      - 1500
+    fc_channels:
+      - 512
+      - 512
+    # cVAE
+    channels: 
+      - 256
+      - 128
+      - 64
+---
+train:
+    spencoder_frame_num: 180
+    spencoder_frame_hop: 0.5

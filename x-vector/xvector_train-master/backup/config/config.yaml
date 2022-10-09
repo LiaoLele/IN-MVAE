@@ -1,0 +1,70 @@
+training: !!bool "true"
+device:
+    # - 0
+    - 1
+unprocessed_data: '/data/hdd0/zhaoyigu/DATASET/VoxCeleb/raw/test_wav/*/*/*.wav'
+---
+data:
+    train_path: '/home/user/zhaoyi.gu/mnt/g2/DATASET/VoxCeleb/concatenate/dev/'
+    test_path: '/home/user/zhaoyi.gu/mnt/g2/DATASET/VoxCeleb/concatenate/test/'  # '/data/hdd0/zhaoyigu/DATASET/TIMIT_for_sp_encoder/test/'
+    data_preprocessed: !!bool "true" 
+    sr: 16000
+    stft_frame: 0.064 #(s)
+    stft_hop: 0.016 #(s)
+    test_start_time: 0 #(min)
+    train_start_time: 2 #(min)
+    train_set: 100000 #(chunk)
+    test_spkrs: 0.03
+    train_spkrs: 1.0
+---   
+model:
+    feat_num: 30
+    tdnn_channels: 
+      - 512
+      - 512
+      - 512
+      - 512
+      - 1500
+    fc_channels:
+      - 512
+      - 512
+    drop_p: 0.0
+    model_path: '/home/user/zhaoyi.gu/mnt/g2/PROJECT/Xvector_speaker_encoder_data/test_voxceleb_try/model/' #Model  for testing, inference, or resuming training
+---
+train:
+    N : 16 #Number of speakers in batch
+    M : 10 #Number of utterances per speaker
+    use_random_len: !!bool "false"
+    average_frame_num: 160
+    frame_hop: 0.25
+    num_workers: 4 #number of workers for dataloader
+    use_dropout: !!bool "true"
+    use_lr_decay: !!bool "true"
+    lr: 0.01 
+    min_lr: 0.001
+    lr_decay_step: 1
+    drop_p: 0.0
+    epochs: 5000 #Max training speaker epoch 
+    log_interval: 30 #Epochs before printing progress
+    log_file: '/data/hdd0/zhaoyigu/PROJECT/Xvector_speaker_encoder_data/test_voxceleb_try/model/training_log.txt'
+    checkpoint_interval: 100 #Save model after x speaker epochs
+    resume_data_path: '/data/hdd0/zhaoyigu/PROJECT/Xvector_speaker_encoder_data/test_voxceleb_try/model/model.pt'
+    resume: !!bool "false" #Resume training from previous model data
+    tensorboard_title: 'voxceleb'
+    clip: {'model by norm': 3}
+# ---
+# test:
+#     test_path: '/data/hdd0/zhaoyigu/DATASET/Librispeech/concatenate/test_dev_clean/'
+#     num_speaker: 80
+#     num_utter_per_speaker: 0
+#     average_frame_num_train: 160
+#     N : 8 #Number of speakers in batch
+#     enroll_num: 8 #Number of utterances per speaker
+#     verify_num: 10
+#     enroll_hop: 0.5
+#     verify_hop: 1
+#     num_workers: 3 #number of workers for data laoder
+#     epochs: 50 #testing speaker epochs
+#     frame_num: 160
+#     model_path: '/data/hdd0/zhaoyigu/PROJECT/GE2E_speaker_encoder_data/test_librispeech--64_02/model/'
+#     best_performance: 0

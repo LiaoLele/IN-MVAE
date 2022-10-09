@@ -1,0 +1,4 @@
+xvectorpath: /home/nis/lele.liao/projects/code_vc/PLDA/data/xvec_ndarray.zero_mean.train.0.pkl
+Centralization: True
+lda_dim: 128
+Speaker number: 1172

@@ -1,0 +1,2 @@
+pldatraindata: /home/nis/lele.liao/projects/code_vc/PLDA/data/egs_train.pkl
+xvector_model: /home/nis/lele.liao/projects/x-vector/xvector_train_result/model/state_dict--sub_epoch=200.pt
