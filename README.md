@@ -5,7 +5,7 @@ This repository contains the code for the paper "Multichannel Variational Autoen
 
 
 
-Test Run the Algorithms
+Run the Algorithms
 -----------------------
 
-The `main.py` programe in `code_vc` directory allows to train the IN-MVAE networks and test the different BSS algorithms.
+The `main.py` program in `code_vc` directory allows to train the IN-MVAE networks and test the different BSS algorithms.
